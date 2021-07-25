@@ -14,8 +14,6 @@ function getState(day, current, props) {
   }
   if (disabledByDefault) {
     state = 'disabled';
-  } else if (isDateNotInTheRange(_minDate, _maxDate, day)) {
-    state = 'disabled';
   } else if (!sameMonth(day, current)) {
     state = 'disabled';
   }

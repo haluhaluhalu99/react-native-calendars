@@ -108,7 +108,9 @@ class CalendarList extends Component<CalendarListProps, CalendarListState> {
     /** How far from the end to trigger the onEndReached callback */
     onEndReachedThreshold: PropTypes.number,
     /** Called once when the scroll position gets within onEndReachedThreshold */
-    onEndReached: PropTypes.func
+    onEndReached: PropTypes.func,
+    /** Called once when stop the scrolling */
+    onMomentumScrollEnd: PropTypes.func,
   };
 
   static defaultProps = {
@@ -180,7 +182,7 @@ class CalendarList extends Component<CalendarListProps, CalendarListState> {
 
     for (let i = 0; i < rowClone.length; i++) {
       let val: XDate | string = prevState.texts[i];
-        // @ts-ignore
+      // @ts-ignore
       if (rowClone[i].getTime) {
         val = rowClone[i].clone();
         // @ts-ignore
@@ -362,6 +364,7 @@ class CalendarList extends Component<CalendarListProps, CalendarListState> {
           keyExtractor={this.props.keyExtractor}
           onEndReachedThreshold={this.props.onEndReachedThreshold}
           onEndReached={this.props.onEndReached}
+          onMomentumScrollEnd={this.props.onMomentumScrollEnd}
         />
         {this.renderStaticHeader()}
       </View>

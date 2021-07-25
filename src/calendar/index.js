@@ -68,7 +68,9 @@ class Calendar extends Component {
     /** Style passed to the header */
     headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
     /** Allow rendering of a totally custom header */
-    customHeader: PropTypes.any
+    customHeader: PropTypes.any,
+    /** Allow rendering of a totally custom week */
+    weekComponent: PropTypes.any,
   };
 
   static defaultProps = {
@@ -195,19 +197,27 @@ class Calendar extends Component {
     );
   }
 
+  getWeekComponent() {
+    const { weekComponent } = this.props;
+
+    if (weekComponent) {
+      return weekComponent;
+    }
+  }
+
   renderWeek(days, id) {
     const week = [];
-
+    const WeekComponent = this.getWeekComponent();
     days.forEach((day, id2) => {
       week.push(this.renderDay(day, id2));
     }, this);
-
     if (this.props.showWeekNumbers) {
       week.unshift(this.renderWeekNumber(days[days.length - 1].getWeek()));
     }
 
     return (
       <View style={this.style.week} key={id}>
+        <WeekComponent dataWeek={{ id, days }} />
         {week}
       </View>
     );
