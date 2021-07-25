@@ -54,6 +54,8 @@ export type CalendarListProps = CalendarProps & {
   onEndReachedThreshold?: number;
   /** Called once when the scroll position gets within onEndReachedThreshold */
   onEndReached?: () => void;
+  /** Called once when stop the scrolling */
+  onMomentumScrollEnd: PropTypes.func,
 };
 
 type XDateAndBump = XDate & {propBump?: number} ;
