@@ -278,7 +278,6 @@ class Calendar extends Component {
           accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
           importantForAccessibility={this.props.importantForAccessibility} // Android
         >
-          {this.renderHeader()}
           {this.renderMonth()}
         </View>
       </GestureComponent>
