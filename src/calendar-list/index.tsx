@@ -55,7 +55,9 @@ export type CalendarListProps = CalendarProps & {
   /** Called once when the scroll position gets within onEndReachedThreshold */
   onEndReached?: () => void;
   /** Called once when stop the scrolling */
-  onMomentumScrollEnd: () => void;
+  onMomentumScrollEnd?: () => void;
+  /** How many items to render in the initial batch */
+  initialNumToRender?: number,
 };
 
 type XDateAndBump = XDate & {propBump?: number} ;
@@ -113,6 +115,8 @@ class CalendarList extends Component<CalendarListProps, CalendarListState> {
     onEndReached: PropTypes.func,
     /** Called once when stop the scrolling */
     onMomentumScrollEnd: PropTypes.func,
+    /** How many items to render in the initial batch */
+    initialNumToRender: PropTypes.number,
   };
 
   static defaultProps = {
@@ -346,6 +350,7 @@ class CalendarList extends Component<CalendarListProps, CalendarListState> {
           ref={c => (this.listView = c)}
           style={[this.style.container, style]}
           // @ts-ignore
+          initialNumToRender={this.props.initialNumToRender}
           initialListSize={pastScrollRange + futureScrollRange + 1} // ListView deprecated
           data={this.state.rows}
           renderItem={this.renderItem}
